@@ -1,0 +1,39 @@
+.search_header {
+  width: 100%;
+  height: 5rem;
+  line-height: 5rem;
+  text-align: center;
+}
+
+.search_header .search {
+  width: 90%;
+  height: 3.8rem;
+  line-height: 3.8rem;
+  border-radius: .5rem;
+  border: 1px solid #eee;
+}
+
+.search_content {
+  background: #fff;
+}
+
+.search_content .item_list {
+  padding: 0 .5rem;
+}
+
+.search_content .item_list li {
+  display: flex;
+  border: 1px solid #eee;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.search_content .item_list li img {
+  width: 6rem;
+  height: 6rem;
+}
+
+.search_content .item_list li .inner {
+  flex: 1;
+  padding-left: 1rem;
+}
