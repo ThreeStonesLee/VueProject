@@ -1,0 +1,444 @@
+<template>
+    <div id="home">
+        <header class="index_header">
+        <div class="hlist">
+            <img src="../assets/images/rexiao.png" alt="">
+            <p>热销榜</p>
+        </div>
+        <div class="hlist">
+            <img src="../assets/images/caidan.png" alt="">
+            <p>菜单</p>
+        </div>
+        <div class="hlist">
+            <img src="../assets/images/sousuo.png" alt="">
+            <p>搜你喜欢</p>
+        </div>
+    </header>
+    <aside class="left_cate" id="left_cate">
+        <ul>
+            <li>精美美食</li>
+            <li>精品小面</li>
+            <li>饮料酒水</li>
+            <li>新品推荐</li>
+            <li>舌尖美食</li>
+            <li>厨师长推荐</li>
+        </ul>
+        <div id="nav_cate" class="nav_cate">
+            <img src="../assets/images/nav.png" alt="">
+            <p>菜单</p>
+        </div>
+    </aside>
+    <div class="content">
+        <div class="item">
+            <h3 class="item_cate">皮蛋廋肉粥</h3>
+            <ul class="item_list">
+                <li>
+                    <div class="inner">
+                        <router-link to='/pcontent'>
+                            <img src="../assets/images/1.jpg" alt="">
+                            <p class="title">大蒜腊肉</p>
+                            <p class="price">￥26</p>
+                        </router-link>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/2.jpg" alt="">
+                        <p class="title">家乡扣肉</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/3.jpg" alt="">
+                        <p class="title">主打鸡</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/2.jpg" alt="">
+                        <p class="title">酸辣土豆丝</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/3.jpg" alt="">
+                        <p class="title">家乡腊肉</p>
+                        <p class="price">￥26</p>
+                    </div> 
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/2.jpg" alt="">
+                        <p class="title">长沙臭豆腐</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/3.jpg" alt="">
+                        <p class="title">主打鸡</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+            </ul>
+        </div>
+        <div class="item">
+            <h3 class="item_cate">皮蛋廋肉粥</h3>
+            <ul class="item_list">
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/1.jpg" alt="">
+                        <p class="title">大蒜腊肉</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/2.jpg" alt="">
+                        <p class="title">家乡扣肉</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/3.jpg" alt="">
+                        <p class="title">主打鸡</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/2.jpg" alt="">
+                        <p class="title">酸辣土豆丝</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/3.jpg" alt="">
+                        <p class="title">家乡腊肉</p>
+                        <p class="price">￥26</p>
+                    </div> 
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/2.jpg" alt="">
+                        <p class="title">长沙臭豆腐</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/3.jpg" alt="">
+                        <p class="title">主打鸡</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+            </ul>
+        </div>
+        <div class="item">
+            <h3 class="item_cate">皮蛋廋肉粥</h3>
+            <ul class="item_list">
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/1.jpg" alt="">
+                        <p class="title">大蒜腊肉</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/2.jpg" alt="">
+                        <p class="title">家乡扣肉</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/3.jpg" alt="">
+                        <p class="title">主打鸡</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/2.jpg" alt="">
+                        <p class="title">酸辣土豆丝</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/3.jpg" alt="">
+                        <p class="title">家乡腊肉</p>
+                        <p class="price">￥26</p>
+                    </div> 
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/2.jpg" alt="">
+                        <p class="title">长沙臭豆腐</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+                <li>
+                    <div class="inner">
+                        <img src="../assets/images/3.jpg" alt="">
+                        <p class="title">主打鸡</p>
+                        <p class="price">￥26</p>
+                    </div>
+                    
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="bg" id="bg">
+    </div>
+    </div>
+</template>
+<script>
+export default {
+    data() {
+        return {
+
+        }
+    }
+}
+</script>
+<style lang="scss">
+.index_header {
+    width: 96%;
+    margin: 0 auto;
+    height: 4.4rem;
+    background-color: #fff;
+    margin-top: 1rem;
+    display: flex;
+    border-radius: .5rem;
+    .hlist {
+        flex: 1;
+        text-align: center;
+        padding: .2rem;
+        border-right: 1px solid #eee;
+        img {
+            width: 2rem;
+            height: 2rem;
+            margin: 0 auto;
+        }
+        &:last-child {
+            border-right: none;
+        }
+    }
+}
+
+.item {
+    .item_cate {
+        text-align: center;
+        padding: .5rem;
+    }
+    .item_list {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 .5rem;
+        li {
+            width: 33.3%;
+            padding: .5rem;
+            box-sizing: border-box;
+            
+            .inner { 
+                // 这个类的作用是营造一种间隔
+                background-color: #fff;
+                width: 100%;
+                border-radius: .5rem;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                }
+                p {
+                    padding: .2rem .5rem;
+                }
+                .title {
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
+
+// 侧边栏
+
+.left_cate {
+    // css3动画
+    transition: all 1s;
+    transform: translate(-100%, 0);
+    width: 6rem;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #eee;
+    z-index: 2;
+    ul {
+        position: absolute;
+        padding: .5rem;
+        height: 100%;
+        z-index: 3;
+        background: #eee;
+        li {
+            line-height: 4.4rem;
+        }
+    }
+    .nav_cate {
+        position: absolute;
+        top: 42%;
+        right: -3.5rem;
+        background: rgba(132, 128, 128, .8);
+        width: 5rem;
+        height: 4rem;
+        text-align: center;
+        border-radius: 0 50% 50% 0;
+        z-index: 2; 
+        img {
+            width: 1.8rem;
+            height: 1.8rem;
+            margin-left: 1rem;
+            margin-top: .4rem;
+        }
+        p {
+            color: #fff;
+            margin-left: 1rem;
+            margin-top: -.3rem;
+        }
+    }
+}
+
+.bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(132, 128, 128, .4);
+    z-index: 1;
+    display: none;
+}
+
+// 首页导航
+
+#footer_nav {
+    height: 4.4rem;
+    width: 4.4rem;
+    background: #000;
+    position: fixed;
+    color: #fff;
+    bottom: .5rem;
+    left: .5rem; 
+    border-radius: 50%;
+    text-align: center;
+    img {
+        width: 1.8rem;
+        height: 1.8rem;
+        margin-top: .4rem;
+    }
+    p {
+        position: relative;
+        margin-top: -.2rem;
+    }
+}
+.footer_nav_show {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(0,0,0,.6);
+    top: 0;
+    left: 0;
+    z-index: 3;
+    .list {
+        li {
+            height: 4.4rem;
+            width: 4.4rem;
+            background: #000;
+            position: absolute;
+            color: #fff;
+            
+            left: .5rem; 
+            border-radius: 50%;
+            text-align: center;
+            img {
+                width: 1.8rem;
+                height: 1.8rem;
+                margin-top: .4rem;
+            }
+            p {
+                position: relative;
+                margin-top: -.2rem;
+                font-size: 1rem;
+            }
+            &:nth-child(1) {
+                bottom: 15.4rem;
+                left: 0;
+            }
+            &:nth-child(2) {
+                bottom: 12.4rem;
+                left: 30%;
+                margin-left: -2.2rem;
+            }
+            &:nth-child(3) {
+                bottom: 7.4rem;
+                left: 45%;
+                margin-left: -2.2rem;
+            }
+            &:nth-child(4) {
+                bottom: .5rem;
+                left: 50%;
+                margin-left: -2.2rem;
+            }
+            &:nth-child(5) {
+                bottom: .5rem;
+                left: .5rem;
+            }
+        }  
+    }
+}
+#footer_cart {
+    height: 4.4rem;
+    width: 4.4rem;
+    background: rgb(255, 0, 0);
+    position: fixed;
+    color: #fff;
+    bottom: .5rem;
+    right: .5rem; 
+    border-radius: 50%;
+    text-align: center;
+    z-index: 2;
+    img {
+        width: 1.8rem;
+        height: 1.8rem;
+        margin-top: .4rem;
+    }
+    p {
+        position: relative;
+        margin-top: -.2rem;
+    }
+}
+</style>
+
