@@ -5,37 +5,16 @@
         </router-link>
         <div class="p_content">
             <div class="p_info">
-                <img src="../assets/images/product.jpg" alt="">
-                <h2>小炒肉</h2>
-                <p class="price">22.00/份</p>
+                <img :src="api + list.img_url" alt="">
+                <h2>{{list.title}}</h2>
+                <p class="price">￥{{list.price}}</p>
             </div>
             <div class="p_detial">
                 <h3>
                     商品详情
                 </h3>
-                <div class="p_content">
-                    <img src="../assets/images/product.jpg" alt="">
-                    <br>
-                    <p>
-                        韩国辣酱海鲜炒面，青椒炒牛肉，芦笋腰果炒虾仁，家常料理简单又好吃
-                    </p>
-                </div>
-            </div>
-            <div class="p_info">
-                <img src="../assets/images/product.jpg" alt="">
-                <h2>小炒肉</h2>
-                <p class="price">22.00/份</p>
-            </div>
-            <div class="p_detial">
-                <h3>
-                    商品详情
-                </h3>
-                <div class="p_content">
-                    <img src="../assets/images/product.jpg" alt="">
-                    <br>
-                    <p>
-                        韩国辣酱海鲜炒面，青椒炒牛肉，芦笋腰果炒虾仁，家常料理简单又好吃
-                    </p>
+                <div class="p_content" v-html="list.content">
+                   {{list.content}}
                 </div>
             </div>
         </div>
@@ -43,25 +22,71 @@
             <div class="cart">
                 <strong>数量：</strong>
                 <div class="cart_num">
-                    <div class="input_left">-</div>
+                    <div class="input_left" @click="decNum()">-</div>
                     <div class="input_center">
-                        <input type="text" readonly="readonly" value="1" name="">
+                        <input type="text" readonly="readonly" v-model="num" name="">
                     </div>
-                    <div class="input_right">+</div>
+                    <div class="input_right" @click="incNum()">+</div>
                 </div>
             </div>
-            <router-link to='/home'>
-                <button class="addcart">加入购物车</button>
-            </router-link>
-            
+            <button class="addcart" @click="addCart()">加入购物车</button>
         </footer>
     </div>
 </template>
 <script>
+import Config from '../model/config.js';
 export default {
     data() {
         return {
-
+            list: [],
+            api: Config.api,
+            num: 1
+        }
+    },
+    mounted() {
+        // 动态路由传值
+        // {path: '/pcontent/:id', component: Pcontent},
+        // console.log(this.$route.params);
+        // get传值
+        // console.log(this.$route.query)
+        var id = this.$route.query.id;
+        this.requestData(id);
+    },
+    methods: {
+        requestData(id) {
+            var api = this.api + 'api/productcontent?id=' + id;
+            this.$http.get(api).then((respone) => {
+                console.log(respone)
+                this.list = respone.body.result[0];
+            }, (err) =>　{
+                console.log(err)
+            })
+        },
+        decNum() {
+            if(this.num > 1) {
+                --this.num;
+            }  
+        },
+        incNum() {
+            ++this.num;
+        },
+        addCart() {
+            var api = this.api + "api/addcart";
+            this.$http.post(api, {
+            uid: 'a001',
+            title: this.list.tilte,
+            price: this.list.price,
+            num: this.num,
+            product_id: this.list._id,
+            img_url: this.list.img_url
+            }).then((respone) => {
+                console.log(respone);
+                if(respone.body.success) {
+                    this.$router.push({path: 'home'})
+                }
+            }, (err) => {
+                console.log(err);
+            })
         }
     }
 }

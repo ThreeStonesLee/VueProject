@@ -16,12 +16,7 @@
     </header>
     <aside class="left_cate" id="left_cate">
         <ul>
-            <li>精美美食</li>
-            <li>精品小面</li>
-            <li>饮料酒水</li>
-            <li>新品推荐</li>
-            <li>舌尖美食</li>
-            <li>厨师长推荐</li>
+            <li v-for="(item, index) in list" :key="index"  @click='changeList(index)'>{{ item.title }}</li>
         </ul>
         <div id="nav_cate" class="nav_cate">
             <img src="../assets/images/nav.png" alt="">
@@ -29,183 +24,16 @@
         </div>
     </aside>
     <div class="content">
-        <div class="item">
-            <h3 class="item_cate">皮蛋廋肉粥</h3>
+        <div class="item" v-for="(item, index) in list" :key="index">
+            <h3 class="item_cate">{{ item.title }}</h3>
             <ul class="item_list">
-                <li>
+                <li v-for="(food, key) in item.list" :key="key">
                     <div class="inner">
-                        <router-link to='/pcontent'>
-                            <img src="../assets/images/1.jpg" alt="">
-                            <p class="title">大蒜腊肉</p>
-                            <p class="price">￥26</p>
+                        <router-link :to="'/pcontent?id=' + food._id" >
+                            <img :src="api + food.img_url">
+                            <p class="title">{{ food.title }}</p>
+                            <p class="price">￥{{ food.price }}</p>
                         </router-link>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/2.jpg" alt="">
-                        <p class="title">家乡扣肉</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/3.jpg" alt="">
-                        <p class="title">主打鸡</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/2.jpg" alt="">
-                        <p class="title">酸辣土豆丝</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/3.jpg" alt="">
-                        <p class="title">家乡腊肉</p>
-                        <p class="price">￥26</p>
-                    </div> 
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/2.jpg" alt="">
-                        <p class="title">长沙臭豆腐</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/3.jpg" alt="">
-                        <p class="title">主打鸡</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-            </ul>
-        </div>
-        <div class="item">
-            <h3 class="item_cate">皮蛋廋肉粥</h3>
-            <ul class="item_list">
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/1.jpg" alt="">
-                        <p class="title">大蒜腊肉</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/2.jpg" alt="">
-                        <p class="title">家乡扣肉</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/3.jpg" alt="">
-                        <p class="title">主打鸡</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/2.jpg" alt="">
-                        <p class="title">酸辣土豆丝</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/3.jpg" alt="">
-                        <p class="title">家乡腊肉</p>
-                        <p class="price">￥26</p>
-                    </div> 
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/2.jpg" alt="">
-                        <p class="title">长沙臭豆腐</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/3.jpg" alt="">
-                        <p class="title">主打鸡</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-            </ul>
-        </div>
-        <div class="item">
-            <h3 class="item_cate">皮蛋廋肉粥</h3>
-            <ul class="item_list">
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/1.jpg" alt="">
-                        <p class="title">大蒜腊肉</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/2.jpg" alt="">
-                        <p class="title">家乡扣肉</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/3.jpg" alt="">
-                        <p class="title">主打鸡</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/2.jpg" alt="">
-                        <p class="title">酸辣土豆丝</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/3.jpg" alt="">
-                        <p class="title">家乡腊肉</p>
-                        <p class="price">￥26</p>
-                    </div> 
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/2.jpg" alt="">
-                        <p class="title">长沙臭豆腐</p>
-                        <p class="price">￥26</p>
-                    </div>
-                    
-                </li>
-                <li>
-                    <div class="inner">
-                        <img src="../assets/images/3.jpg" alt="">
-                        <p class="title">主打鸡</p>
-                        <p class="price">￥26</p>
                     </div>
                     
                 </li>
@@ -214,14 +42,82 @@
     </div>
     <div class="bg" id="bg">
     </div>
+    <v-navfooter></v-navfooter>
+    <div id="footer_cart" class="footer_cart">
+        <img src="../assets/images/cart.png"/>
+        <p>购物车</p>
+        <span class="num" v-if="cartNum">{{ cartNum }}</span>
+    </div>
     </div>
 </template>
 <script>
+import NavFooter from './public/NavFooter.vue';
+// 引入配置文件
+import Config from '../model/config.js'
 export default {
     data() {
         return {
-
+            list: [],
+            // 引入的数据需要在这个配置后，才能在下面的方法中或者{{}}使用
+            api: Config.api, 
+            cartNum: 0,
         }
+    },
+    components: {
+        'v-navfooter': NavFooter,
+    },
+    methods: {
+        asideInitDom() {
+            var navCate = document.getElementById('nav_cate');
+            var leftCate = document.getElementById('left_cate');
+            var bg = document.getElementById('bg');
+            var flag = true;
+            navCate.addEventListener('click', function() {
+                if(flag) {
+                    flag = false;
+                    bg.style.display = 'block';
+                    leftCate.style.transform = 'translate(0,0)';
+                } else {
+                    flag = true;
+                    bg.style.display = 'none';
+                    leftCate.style.transform = 'translate(-100%,0)';
+                }
+            })
+        },
+        requestData() {
+            //注意this的指向
+            var api = this.api + 'api/productlist';
+            this.$http.get(api).then(response => {
+                console.log(response)
+                this.list = response.body.result;
+            }, response => {
+                console.log(response)
+            });
+        },
+        changeList(key) {
+            console.log(key);
+            var listDom = document.querySelectorAll('.item_cate');
+            document.documentElement.scrollTop = listDom[key].offsetTop;
+            var leftCate = document.getElementById('left_cate');
+            bg.style.display = 'none';
+            leftCate.style.transform = 'translate(-100%,0)';
+            
+        },
+        getCartCount() {
+            var api = this.api + 'api/cartCount?uid=a001';
+            this.$http.get(api).then((response) => {
+                console.log(response);
+                this.cartNum = response.body.result;
+            }, (err) => {
+                console.log(err)
+            })
+        }
+
+    },
+    mounted() {
+        this.asideInitDom();
+        this.requestData();
+        this.getCartCount();
     }
 }
 </script>
@@ -270,8 +166,13 @@ export default {
                 width: 100%;
                 border-radius: .5rem;
                 overflow: hidden;
+                a {
+                    color: #666;
+                    text-decoration: none;
+                }
                 img {
                     width: 100%;
+                    height: 6rem;
                 }
                 p {
                     padding: .2rem .5rem;
@@ -288,7 +189,7 @@ export default {
 
 .left_cate {
     // css3动画
-    transition: all 1s;
+    transition: all .5s;
     transform: translate(-100%, 0);
     width: 6rem;
     height: 100%;

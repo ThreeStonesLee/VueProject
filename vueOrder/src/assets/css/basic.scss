@@ -28,6 +28,9 @@ strong {
     height: 0;
     clear: both;
 }
+a {
+    text-decoration: none;
+}
 
 
 .footer_nav{
@@ -59,10 +62,8 @@ strong {
     
     p{
         position: relative;
-        
         top:-0.2rem
     }
-    
 }
 
 /*导航弹出层*/
@@ -166,6 +167,19 @@ strong {
     p{
         position: relative;        
         top:-0.2rem
+    }
+    .num {
+        position: absolute;
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        background-color: red;
+        line-height: 2rem;
+        text-align: center;
+        top: -.5rem;
+        right: -.5rem;
+        color: #fff;
     }
     
 }

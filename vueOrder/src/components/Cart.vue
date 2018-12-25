@@ -126,10 +126,7 @@
             </div>  
         </div>
     </div>
-    <div id="footer_nav" class="footer_nav">
-        <img src="../assets/images/navigation.png" alt="">
-        <p>导航</p>
-    </div>
+    <v-navfooter></v-navfooter>
     <div id="footer_book" class="footer_book">
         <img src="../assets/images/menu.png" alt="">
         <p>菜单</p>
@@ -141,11 +138,15 @@
     </div>
 </template>
 <script>
+import NavFooter from './public/NavFooter.vue'
 export default {
     data() {
         return {
 
         }
+    },
+    components: {
+        'v-navfooter': NavFooter,
     }
 }
 </script>
