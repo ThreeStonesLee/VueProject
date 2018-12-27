@@ -18,10 +18,10 @@
         <ul>
             <li v-for="(item, index) in list" :key="index"  @click='changeList(index)'>{{ item.title }}</li>
         </ul>
-        <div id="nav_cate" class="nav_cate">
-            <img src="../assets/images/nav.png" alt="">
-            <p>菜单</p>
-        </div>
+            <div id="nav_cate" class="nav_cate">
+                <img src="../assets/images/nav.png" alt="">
+                <p>菜单</p>
+            </div>  
     </aside>
     <div class="content">
         <div class="item" v-for="(item, index) in list" :key="index">
@@ -44,9 +44,11 @@
     </div>
     <v-navfooter></v-navfooter>
     <div id="footer_cart" class="footer_cart">
-        <img src="../assets/images/cart.png"/>
-        <p>购物车</p>
-        <span class="num" v-if="cartNum">{{ cartNum }}</span>
+        <router-link to="/cart">
+            <img src="../assets/images/cart.png"/>
+            <p>购物车</p>
+            <span class="num" v-if="cartNum">{{ cartNum }}</span>
+        </router-link>
     </div>
     </div>
 </template>
@@ -339,6 +341,7 @@ export default {
     p {
         position: relative;
         margin-top: -.2rem;
+        color: #fff;
     }
 }
 </style>

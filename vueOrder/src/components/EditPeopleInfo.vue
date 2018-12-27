@@ -2,12 +2,12 @@
     <div id="start">
         <div class="start_content">
             <header class="start_header">
-                <img src="../assets/images/canju.png" alt=""> 用餐人数
+                <img src="../assets/images/canju.png" alt=""> 修改 用餐人数
             </header>
             <p class="notice">请选择正确的用餐人数，小二马上给你送餐具</p>
             <div class="content">
                 <ul class="user_list">
-                    <li v-for="(item, index) in userList" :key='index' :class="{'active':index==0}"> 
+                    <li v-for="(item, index) in uesrList" :key='index' :class="{'active': parseInt(peopleList.p_num)==index+1 }"> 
                         <span>{{ item }}</span>
                     </li>
                 </ul>
@@ -33,8 +33,13 @@
                 <span>开始点菜</span>
             </div>
         </router-link> -->
-        <div id="start" class="start" @click="addPeopleInfo()">
-            <span>开始点菜</span>
+        <div id="start_ok" class="start_ok" @click="addPeopleInfo()">
+            <span>确定修改</span>
+        </div>
+        <div id="start_cancel" class="start_cancel">
+            <router-link to='/cart'>
+                <span>取消</span>
+            </router-link>  
         </div>
         
     </div>
@@ -47,7 +52,8 @@ export default {
             'p_num': '1人',
             'p_mark': '',
             'api': Config.api,
-            'userList': [],
+            'peopleList': [],
+            'uesrList': [],
         }
     },
     methods: {
@@ -85,26 +91,34 @@ export default {
                 p_num: this.p_num,
                 p_mark: this.p_mark
             }).then((response) => {
-                console.log(response)
+                // console.log(response)
                 if(response.body.success) {
-                    this.$router.push({path: 'home'})
+                    this.$router.push({path: 'cart'})
                 }
             },(err) => {
+                console.log(err);
+            })
+        },
+        getPeopleInfoList() {
+            var api = this.api + 'api/peopleInfoList?uid=a002';
+            this.$http.get(api).then((response) => {
+                // console.log(response)
+                this.peopleList = response.body.result[0];
+                // console.log(this.peopleList)
+                this.p_mark = this.peopleList.p_mark;
+            }, (err) => {
                 console.log(err);
             })
         }
     },
     mounted() {
         for(var i = 0; i < 12; i ++) {
-            this.userList.push( i + 1 + '人');
+            this.uesrList.push(i + 1 + '人');
         }
-        //数据没有渲染完成就去获取dom节点
-        //如何dom加载完成以后再去获取dom节点
-        //数据渲染完成后再去获取
         this.$nextTick(function() {
             this.addChangeEvent();
         })
-       
+        this.getPeopleInfoList()
     }
 }
 </script>
@@ -169,11 +183,10 @@ export default {
     }
 } 
 
-.start {
+.start_ok {
     position: fixed;
     bottom: 5rem;
-    left: 50%;
-    margin-left: -3rem;
+    right: 5rem;
     height: 6rem;
     width: 6rem;
     background-color: red;
@@ -181,6 +194,26 @@ export default {
     border-radius: 50%;
     span {
         display: block;
+        width: 2rem;
+        margin: 0 auto;
+        position: relative;
+        top: 1.5rem;
+    }
+}
+
+.start_cancel {
+    position: fixed;
+    bottom: 5rem;
+    left: 5rem;
+    height: 6rem;
+    width: 6rem;
+    line-height: 3rem;
+    background-color: red;
+    color: #fff;
+    border-radius: 50%;
+    span {
+        display: block;
+        color: #fff;
         width: 2rem;
         margin: 0 auto;
         position: relative;

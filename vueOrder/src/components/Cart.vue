@@ -1,76 +1,43 @@
 <template>
     <div id='cart'>
-        <div class="cart_content">
-        <div class="cart_info">
+        <div class="cart_content" >
+        <div class="cart_info" v-if="totalNum">
             <h2>购物车</h2>
             <div class="p_number">
                 <div class="p_number_left">
-                    <p>用餐人数：2人</p>
-                    <p>备注：无</p>
+                    <p>用餐人数：{{ peopleList.p_num }}</p>
+                    <p>备注：<span v-if="!peopleList.p_mark">无</span><span v-if="peopleList.p_mark">{{ peopleList.p_mark }}</span></p>
                 </div>
                 <div class="p_number_right">
-                    <img src="../assets/images/edit.png" alt="">
-                    <p>修改</p>
+                    <router-link to="/editpeopleinfo">
+                        <img src="../assets/images/edit.png" alt="">
+                        <p>修改</p>
+                    </router-link>
+                    
                 </div>
             </div>
             <div class="cart_p_num">
-                <p>购物车总共有6个菜</p>
-                <p>合计：<span class="price">￥58</span></p>
+                <p>购物车总共有{{ totalNum }}个菜</p>
+                <p>合计：<span class="price">￥{{ allPrice }}</span></p>
             </div>
         </div>
-        <div class="cart_list">
+        <div class="cart_list" v-if="totalNum">
             <ul>
-                <li class="item">
+                <li class="item" v-for="(item, index) in list" :key="index">
                     <div class="left_food">
-                        <img src="../assets/images/1.jpg" alt="">
+                        <img :src="api+item.img_url" alt="">
                         <div class="food_info">
-                            <p>老干妈肥肠</p>
-                            <p class="price">￥48</p>
+                            <p>{{ item.title }}</p>
+                            <p class="price">￥{{ item.price }}</p>
                         </div>
                     </div>
                     <div class="right_cart">
                         <div class="cart_num">
-                            <div class="input_left">-</div>
+                            <div class="input_left" @click="decNum(item, index)">-</div>
                             <div class="input_center">
-                                <input type="text" readonly="readonly" value="1">
+                                <input type="text" readonly="readonly" v-model="item.num">
                             </div>
-                            <div class="input_right">+</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="item">
-                    <div class="left_food">
-                        <img src="../assets/images/1.jpg" alt="">
-                        <div class="food_info">
-                            <p>老干妈肥肠</p>
-                            <p class="price">￥48</p>
-                        </div>
-                    </div>
-                    <div class="right_cart">
-                        <div class="cart_num">
-                            <div class="input_left">-</div>
-                            <div class="input_center">
-                                <input type="text" readonly="readonly" value="1">
-                            </div>
-                            <div class="input_right">+</div>
-                        </div>
-                    </div>
-                </li>
-                <li class="item">
-                    <div class="left_food">
-                        <img src="../assets/images/1.jpg" alt="">
-                        <div class="food_info">
-                            <p>老干妈肥肠</p>
-                            <p class="price">￥48</p>
-                        </div>
-                    </div>
-                    <div class="right_cart">
-                        <div class="cart_num">
-                            <div class="input_left">-</div>
-                            <div class="input_center">
-                                <input type="text" readonly="readonly" value="1">
-                            </div>
-                            <div class="input_right">+</div>
+                            <div class="input_right" @click="incNum(item)">+</div>
                         </div>
                     </div>
                 </li>
@@ -127,26 +94,97 @@
         </div>
     </div>
     <v-navfooter></v-navfooter>
-    <div id="footer_book" class="footer_book">
-        <img src="../assets/images/menu.png" alt="">
-        <p>菜单</p>
-    </div>   
+    <div class="cart_empty" v-if="!totalNum">您的购物车空空的，请点击菜单点菜！</div>
+    <router-link to="/home">
+        <div id="footer_book" class="footer_book">
+            <img src="../assets/images/menu.png" alt="">
+            <p>菜单</p>
+        </div> 
+    </router-link>
+      
     <div id="footer_cart" class="footer_cart">
-        <img src="../assets/images/cart.png" alt="">
-        <p>购物车</p>
+        <img src="../assets/images/doorder.png" alt="">
+        <p>下单</p>
     </div>
     </div>
 </template>
 <script>
+import Config from '../model/config'
 import NavFooter from './public/NavFooter.vue'
 export default {
     data() {
         return {
-
+            api: Config.api,
+            list: [],
+            peopleList: [],
+            allPrice: 0,
+            totalNum: 0,
         }
     },
     components: {
         'v-navfooter': NavFooter,
+    },
+    methods: {
+        getCartData() {
+            var api = this.api + 'api/cartlist?uid=a001';
+            this.$http.get(api).then((response) => {
+                console.log(response);
+                this.list = response.body.result;
+                this.getTotalResult();
+            }, (err) => {
+                console.log(err);
+            })
+        },
+        decNum(item, key) {
+            var product_id = item.product_id;
+            var num = item.num;
+            var api = this.api + 'api/decCart?uid=a001&product_id=' + product_id + '&num=' + num;
+            this.$http.get(api).then((response) => {
+                this.getTotalResult();
+            }, (err) => {
+                console.log(err);
+            })
+            if(item.num == 1) {
+                this.list.splice(key, 1);
+            } else {
+                --item.num;
+            }
+        },
+        incNum(item) {
+            var product_id = item.product_id;
+            var num = item.num;
+            var api = this.api + 'api/incCart?uid=a001&product_id=' + product_id + '&num=' + num;
+            this.$http.get(api).then((response) => {
+                this.getTotalResult();
+            }, (err) => {
+                console.log(err);
+            })
+            ++item.num;
+        },
+        getTotalResult() {
+            var allPrice = 0;
+            var totalNum = 0;
+            for(var i = 0; i < this.list.length; i ++) {
+                allPrice += parseFloat(this.list[i].price * this.list[i].num); 
+                totalNum += this.list[i].num;
+            }
+            this.allPrice = allPrice;
+            this.totalNum = totalNum;
+        },
+        getPeopleInfoList() {
+            var api = this.api + 'api/peopleInfoList?uid=a002';
+            this.$http.get(api).then((response) => {
+                console.log(response)
+                this.peopleList = response.body.result[0];
+                console.log(this.peopleList)
+            }, (err) => {
+                console.log(err);
+            })
+        }
+    },
+    mounted() {
+        this.getCartData();
+        this.getPeopleInfoList();
     }
 }
 </script>

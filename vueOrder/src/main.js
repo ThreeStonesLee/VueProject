@@ -12,6 +12,7 @@ import Order from './components/Order.vue'
 import Pcontent from './components/Pcontent.vue'
 import Search from './components/Search.vue'
 import Start from './components/Start.vue'
+import EditPeopleInfo from './components/EditPeopleInfo.vue'
 
 const routes = [
   {path: '/cart', component: Cart},
@@ -21,6 +22,7 @@ const routes = [
   {path: '/pcontent', component: Pcontent},
   {path: '/search', component: Search},
   {path: '/start', component: Start},
+  {path: '/editpeopleinfo', component: EditPeopleInfo},
   {path: '*', redirect: '/start'}
 ];
 
