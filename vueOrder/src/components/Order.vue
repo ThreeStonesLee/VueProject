@@ -5,53 +5,83 @@
             <div class="order_top">
                 <img src="../assets/images/timer.png" alt="">
                 <div class="order_info_right">
-                    <h2>118号桌待门店接单</h2>
+                    <h2>{{ list.uid }}号桌待门店接单</h2>
                     <p>请及时联系服务员确认一点菜品信息</p>
                 </div>
             </div>
-            <h3>已点菜品6份，合计：<span class="price">60元</span></h3>
+            <h3>已点菜品{{ list.total_num }}份，合计：<span class="price">{{ list.total_price }}元</span></h3>
+            <button @click="doPay()">立即支付</button>
         </div>
         <div class="order_list">
             <h3>菜品详情：</h3>
             <ul class="list">
-                <li>
-                    <div class="title">烧茄子</div>
+                <li v-for="(item, index) in list.items" :key="index">
+                    <div class="title">
+                        {{item.title}}/以下厨
+                    </div>
                     <div class="num">
-                        1份
+                        {{item.num}}份
                     </div>
                     <div class="price">
-                        12元
-                    </div>
-                </li>
-                <li>
-                    <div class="title">烧茄子</div>
-                    <div class="num">
-                        1份
-                    </div>
-                    <div class="price">
-                        12元
-                    </div>
-                </li>
-                <li>
-                    <div class="title">烧茄子</div>
-                    <div class="num">
-                        1份
-                    </div>
-                    <div class="price">
-                        12元
+                        {{item.price}}元
                     </div>
                 </li>
             </ul>
         </div>
     </div>
+    <v-navfooter></v-navfooter>
+    <router-link to="/home">
+        <div id="footer_book" class="footer_book" style="left:auto; right:5px;">
+            <img src="../assets/images/menu.png" alt="">
+            <p>菜单</p>
+        </div> 
+    </router-link>
     </div>
 </template>
 <script>
+import Config from '../model/config'
+import NavFooter from './public/NavFooter.vue'
+import Storage from '../model/storage.js'
 export default {
     data() {
         return {
-
+            api: Config.api,
+            list: [],
         }
+    },
+    components: {
+        'v-navfooter': NavFooter
+    },
+    methods: {
+        getOrder() {
+            var uid = Storage.get('roomid');
+            var api = this.api + 'api/getOrder?uid=' + uid;
+            this.$http.get(api).then((response) => {
+                // console.log(response)
+                this.list = response.body.result[0]
+            }, (err) => {
+                console.log(err);
+            })
+        },
+        doPay() {
+            var that = this;
+            var uid = Storage.get('roomid');
+            var api = this.api + 'api/doPay';
+            this.$http.post(api, {
+                uid,
+                total_price: that.list.total_price,
+                order_id: that.list.order_id,
+                return_url: 'http://localhost:8080/#/success'
+            }).then((response) => {
+                console.log(response)
+                location.href = response.body.result.data
+            }, (err) => {
+                console.log(err);
+            })
+        }
+    },
+    mounted() {
+        this.getOrder();
     }
 }
 </script>

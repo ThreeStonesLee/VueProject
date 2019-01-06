@@ -102,7 +102,7 @@
         </div> 
     </router-link>
       
-    <div id="footer_cart" class="footer_cart">
+    <div @click="addOrder()" id="footer_cart" class="footer_cart">
         <img src="../assets/images/doorder.png" alt="">
         <p>下单</p>
     </div>
@@ -191,6 +191,33 @@ export default {
                 console.log(response)
                 this.peopleList = response.body.result[0];
                 console.log(this.peopleList)
+            }, (err) => {
+                console.log(err);
+            })
+        },
+        addOrder() {
+            var uid = Storage.get('roomid');
+            var p_num = this.peopleList.p_num;
+            var p_mark = this.peopleList.p_mark;
+            var total_price = this.allPrice;
+            var total_num = this.totalNum;
+            var order = JSON.stringify(this.list) //order是数组，可以json对象转换成字符串
+
+            var api = this.api + "api/addOrder";
+            this.$http.post(api, {
+            //es6属性的简写
+            uid,
+            p_num,
+            p_mark,
+            total_price,
+            total_num,
+            order
+            }).then((respone) => {
+                // console.log(respone);
+                if(respone.body.success) {
+                    this.$router.push({path: 'order'})
+                }
+                
             }, (err) => {
                 console.log(err);
             })

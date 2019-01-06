@@ -1,7 +1,7 @@
 <template>
     <div id="start">
-        <div v-if="showLoding">loding图片</div>
-        <div class="start_content" v-if="!this.showLoding">
+        <div v-show="showLoding">loding图片</div>
+        <div class="start_content" v-show="!this.showLoding">
             <header class="start_header">
                 <img src="../assets/images/canju.png" alt=""> 用餐人数
             </header>
@@ -34,7 +34,7 @@
                 <span>开始点菜</span>
             </div>
         </router-link> -->
-        <div id="start" class="start" @click="addPeopleInfo()" v-if="!this.showLoding">
+        <div id="start" class="start" @click="addPeopleInfo()" v-show="!this.showLoding">
             <span>开始点菜</span>
         </div>
         
