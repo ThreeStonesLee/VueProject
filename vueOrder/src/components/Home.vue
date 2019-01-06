@@ -54,6 +54,7 @@
 </template>
 <script>
 import NavFooter from './public/NavFooter.vue';
+import Storage from '../model/storage.js'
 // 引入配置文件
 import Config from '../model/config.js'
 export default {
@@ -67,6 +68,12 @@ export default {
     },
     components: {
         'v-navfooter': NavFooter,
+    },
+    sockets: { //接受服务器广播过来的addcart
+        //更新购物车的数量
+        addcart: function() {
+            this.getCartCount();
+        }
     },
     methods: {
         asideInitDom() {
@@ -106,7 +113,8 @@ export default {
             
         },
         getCartCount() {
-            var api = this.api + 'api/cartCount?uid=a001';
+            var uid = Storage.get('roomid');
+            var api = this.api + 'api/cartCount?uid=' + uid;
             this.$http.get(api).then((response) => {
                 console.log(response);
                 this.cartNum = response.body.result;

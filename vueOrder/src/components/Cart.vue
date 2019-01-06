@@ -111,6 +111,7 @@
 <script>
 import Config from '../model/config'
 import NavFooter from './public/NavFooter.vue'
+import Storage from '../model/storage.js'
 export default {
     data() {
         return {
@@ -124,9 +125,15 @@ export default {
     components: {
         'v-navfooter': NavFooter,
     },
+    sockets: {
+        addcart: function() {
+            this.getCartData();
+        }
+    },
     methods: {
         getCartData() {
-            var api = this.api + 'api/cartlist?uid=a001';
+            var uid = Storage.get('roomid');
+            var api = this.api + 'api/cartlist?uid=' + uid;
             this.$http.get(api).then((response) => {
                 console.log(response);
                 this.list = response.body.result;
@@ -136,10 +143,13 @@ export default {
             })
         },
         decNum(item, key) {
+            var uid = Storage.get('roomid');
             var product_id = item.product_id;
             var num = item.num;
-            var api = this.api + 'api/decCart?uid=a001&product_id=' + product_id + '&num=' + num;
+            var api = this.api + 'api/decCart?uid=' + uid + '&product_id=' + product_id + '&num=' + num;
             this.$http.get(api).then((response) => {
+                //修改购物车时给服务器广播数据
+                this.$socket.emit('addcart', 'addcart')
                 this.getTotalResult();
             }, (err) => {
                 console.log(err);
@@ -151,10 +161,13 @@ export default {
             }
         },
         incNum(item) {
+            var uid = Storage.get('roomid');
             var product_id = item.product_id;
             var num = item.num;
-            var api = this.api + 'api/incCart?uid=a001&product_id=' + product_id + '&num=' + num;
+            var api = this.api + 'api/incCart?uid=' + uid + '&product_id=' + product_id + '&num=' + num;
             this.$http.get(api).then((response) => {
+                //修改购物车时给服务器广播数据
+                this.$socket.emit('addcart', 'addcart')
                 this.getTotalResult();
             }, (err) => {
                 console.log(err);

@@ -35,6 +35,7 @@
 </template>
 <script>
 import Config from '../model/config.js';
+import Storage from '../model/storage.js'
 export default {
     data() {
         return {
@@ -71,9 +72,10 @@ export default {
             ++this.num;
         },
         addCart() {
+            var uid = Storage.get('roomid');
             var api = this.api + "api/addcart";
             this.$http.post(api, {
-            uid: 'a001',
+            uid: uid,
             title: this.list.tilte,
             price: this.list.price,
             num: this.num,
@@ -82,6 +84,8 @@ export default {
             }).then((respone) => {
                 console.log(respone);
                 if(respone.body.success) {
+                    //加入购物车时给服务器广播数据
+                    this.$socket.emit('addcart', 'addcart')
                     this.$router.push({path: 'home'})
                 }
             }, (err) => {

@@ -41,6 +41,7 @@
 </template>
 <script>
 import Config from '../model/config.js';
+import Storage from '../model/storage.js'
 export default {
     data() {
         return {
@@ -79,9 +80,10 @@ export default {
         },
 
         addPeopleInfo() {
+            var uid = Storage.get('roomid');
             var api = this.api + 'api/addPeopleInfo';
             this.$http.post(api, {
-                uid: 'a002',
+                uid: uid,
                 p_num: this.p_num,
                 p_mark: this.p_mark
             }).then((response) => {

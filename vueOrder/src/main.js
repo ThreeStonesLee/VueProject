@@ -2,8 +2,20 @@ import Vue from 'vue'
 import App from './App.vue'
 import VueResource from 'vue-resource'
 import VueRouter from 'vue-router'
+import VueSocketio from 'vue-socket.io'
+import Storage from './model/storage.js'
 Vue.use(VueRouter)
 Vue.use(VueResource)
+Vue.use(new VueSocketio({
+  debug: true,
+  connection: 'http://a.itying.com?roomid=' + roomid
+}))
+
+//从url中获取桌号
+console.log(window.location.hash.split('=')[1])
+
+var roomid = window.location.hash.split('=')[1];
+Storage.set('roomid', roomid)
 
 import Cart from './components/Cart.vue'
 import Home from './components/Home.vue'
@@ -33,5 +45,11 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   router,
+  sockets:{  /*测试期间写 也不不写在根里面*/
+    connect: function(){
+      console.log('socket connected')
+    }
+    
+  },
   render: h => h(App)
 })
