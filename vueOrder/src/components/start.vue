@@ -1,6 +1,7 @@
 <template>
     <div id="start">
-        <div class="start_content">
+        <div v-if="showLoding">loding图片</div>
+        <div class="start_content" v-if="!this.showLoding">
             <header class="start_header">
                 <img src="../assets/images/canju.png" alt=""> 用餐人数
             </header>
@@ -33,7 +34,7 @@
                 <span>开始点菜</span>
             </div>
         </router-link> -->
-        <div id="start" class="start" @click="addPeopleInfo()">
+        <div id="start" class="start" @click="addPeopleInfo()" v-if="!this.showLoding">
             <span>开始点菜</span>
         </div>
         
@@ -49,6 +50,7 @@ export default {
             'p_mark': '',
             'api': Config.api,
             'userList': [],
+            'showLoding': true
         }
     },
     methods: {
@@ -87,14 +89,32 @@ export default {
                 p_num: this.p_num,
                 p_mark: this.p_mark
             }).then((response) => {
-                console.log(response)
+                // console.log(response)
                 if(response.body.success) {
                     this.$router.push({path: 'home'})
                 }
             },(err) => {
                 console.log(err);
             })
+        },
+        getPeopleInfoList() {
+            var uid = Storage.get('roomid');
+            var api = this.api + 'api/peopleInfoList?uid=' + uid;
+            this.$http.get(api).then((response) => {
+                // console.log(response)
+                //如果有用餐人数，则直接跳转到home页面
+                this.showLoding = false; //用户优化方面的让用户感觉没有跳转
+                if(response.body.result.length > 0) {
+                    this.$router.push({path: 'home'})
+                }
+            }, (err) => {
+                console.log(err);
+            })
         }
+    },
+    created() {
+        //判断是否添加点餐人数
+        this.getPeopleInfoList();
     },
     mounted() {
         for(var i = 0; i < 12; i ++) {

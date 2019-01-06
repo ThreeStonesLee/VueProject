@@ -185,7 +185,8 @@ export default {
             this.totalNum = totalNum;
         },
         getPeopleInfoList() {
-            var api = this.api + 'api/peopleInfoList?uid=a002';
+            var uid = Storage.get('roomid');
+            var api = this.api + 'api/peopleInfoList?uid=' + uid;
             this.$http.get(api).then((response) => {
                 console.log(response)
                 this.peopleList = response.body.result[0];
