@@ -71,7 +71,7 @@ export default {
                 uid,
                 total_price: that.list.total_price,
                 order_id: that.list.order_id,
-                return_url: 'http://localhost:8080/#/success'
+                return_url: Config.return_url
             }).then((response) => {
                 console.log(response)
                 location.href = response.body.result.data
